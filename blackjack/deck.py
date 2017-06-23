@@ -18,3 +18,6 @@ class FrenchDeck:
 
     def __setitem__(self, key, value):
         self._cards[key] = value
+
+    def __eq__(self, other):
+        return self._cards == other._cards
