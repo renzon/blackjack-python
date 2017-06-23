@@ -2,7 +2,7 @@ from random import shuffle
 
 import pytest
 
-from blackjack.deck import Card, FrenchDeck
+from blackjack.base_deck import Card, FrenchDeck
 
 
 @pytest.fixture()
