@@ -5,12 +5,12 @@ import pytest
 from blackjack.deck import Card, FrenchDeck
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture()
 def two_of_clubs():
     return Card('2', '♣')
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture()
 def french_deck():
     return FrenchDeck()
 
@@ -38,3 +38,12 @@ def test_deck_shuffle(french_deck):
 
 def test_deck_eq(french_deck):
     assert french_deck == FrenchDeck()
+
+
+def test_deck_pops_card(french_deck: FrenchDeck):
+    assert isinstance(french_deck.pop(), Card)
+
+
+def test_popped_card_removed(french_deck):
+    popped_card = french_deck.pop()
+    assert popped_card not in french_deck

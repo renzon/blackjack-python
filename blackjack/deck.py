@@ -16,8 +16,14 @@ class FrenchDeck:
     def __getitem__(self, pos):
         return self._cards[pos]
 
+    def __contains__(self, card):
+        return card in self._cards
+
     def __setitem__(self, key, value):
         self._cards[key] = value
 
     def __eq__(self, other):
         return self._cards == other._cards
+
+    def pop(self):
+        return self._cards.pop()
