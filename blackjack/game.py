@@ -25,7 +25,7 @@ class PlayerInvalidOperation(Exception):
 
 
 _PLAYER_TEMPLATE = LUCKY_PLAYER_STR = """{name}
-    hand : 
+    hand :
 {hand}
     count: {count}"""
 

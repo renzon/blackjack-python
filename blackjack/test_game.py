@@ -21,11 +21,6 @@ def test_ace_value(suit):
     assert 1 == BlackJackCard('A', suit).value
 
 
-@pytest.mark.parametrize('suit', BlackJackDeck.suits)
-def test_ace_value(suit):
-    assert 1 == BlackJackCard('A', suit).value
-
-
 @pytest.mark.parametrize('face,suit', zip('JQK', BlackJackDeck.suits))
 def test_face_card_value(face, suit):
     assert 10 == BlackJackCard(face, suit).value
@@ -91,7 +86,7 @@ def lucky_player(player):
 
 
 LUCKY_PLAYER_STR = """Player Luck
-    hand : 
+    hand :
         10 of ♣
         9 of ♢
         2 of ♡
@@ -257,7 +252,7 @@ def test_stopped_player_never_become_current_player(game):
     assert stopped_player not in round_players
 
 
-def test_stopped_player_never_become_current_player(game):
+def test_exceeded_player_never_become_current_player(game):
     exceeded_player = game.current_turn_player
     game.toss_card()  # updating to next player
     # exceeding player
