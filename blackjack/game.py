@@ -13,12 +13,21 @@ class BlackJackCard(Card):
     def value(self):
         return self._values[self.rank]
 
+    def description(self):
+        return f'{self.rank} of {self.suit}'
+
 
 PlayerStatus = Enum('PlayerStatus', 'PLAYING EXCEEDED STOPPED')
 
 
 class PlayerInvalidOperation(Exception):
     """Exception to be raised when player try an invalid operation"""
+
+
+_PLAYER_TEMPLATE = LUCKY_PLAYER_STR = """{name}
+    hand : 
+{hand}
+    count: {count}"""
 
 
 class Player:
@@ -59,6 +68,14 @@ class Player:
     def __str__(self):
         cls_name = type(self).__name__
         return f'{cls_name} {self.name}'
+
+    def description(self):
+        card_descriptions = (
+            ' ' * 8 + card.description() for card in self.hand)
+        hand = '\n'.join(card_descriptions)
+
+        return _PLAYER_TEMPLATE.format(
+            name=str(self), hand=hand, count=self.count())
 
 
 class BlackJackDeck(FrenchDeck):

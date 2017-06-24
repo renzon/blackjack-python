@@ -78,15 +78,28 @@ def test_player_initial_status(player: Player):
 
 @pytest.fixture
 def lucky_player(player):
+    player.name = 'Luck'
     winning_hand = (
         BlackJackCard('10', '♣'),
-        BlackJackCard('9', '♣'),
-        BlackJackCard('2', '♣')
+        BlackJackCard('9', '♢'),
+        BlackJackCard('2', '♡')
     )
 
     for card in winning_hand:
         player.hit(card)
     return player
+
+
+LUCKY_PLAYER_STR = """Player Luck
+    hand : 
+        10 of ♣
+        9 of ♢
+        2 of ♡
+    count: 21"""
+
+
+def test_player_description(lucky_player):
+    assert LUCKY_PLAYER_STR == lucky_player.description()
 
 
 @pytest.fixture
@@ -308,7 +321,7 @@ def generate_ordered_stopped_players():
 
 @pytest.mark.parametrize('ordered_players', generate_ordered_stopped_players(),
                          ids=['No exceeded players', 'One exceeed player'])
-def test_game_rank(game:Game, ordered_players):
+def test_game_rank(game: Game, ordered_players):
     shuffled_players = list(ordered_players)
     shuffle(shuffled_players)
     game._players = shuffled_players
