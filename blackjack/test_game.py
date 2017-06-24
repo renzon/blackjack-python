@@ -56,3 +56,10 @@ def test_player_hit_effect_on_hand(hand, player: Player):
     for c in hand:
         player.hit(c)
     assert tuple(hand) == player.hand
+
+
+@pytest.mark.parametrize('count,hand', HAND_COUNT.items())
+def test_player_hit_effect_on_count(count, hand, player: Player):
+    for c in hand:
+        player.hit(c)
+    assert count == player.count()

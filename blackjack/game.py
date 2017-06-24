@@ -25,7 +25,7 @@ class Player:
 
         :return: int
         """
-        return 0
+        return sum(c.value for c in self._hand)
 
     def hit(self, card):
         self._hand.append(card)
