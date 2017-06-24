@@ -1,3 +1,4 @@
+from enum import Enum, auto
 from itertools import cycle
 
 from blackjack.base_deck import Card
@@ -10,6 +11,10 @@ class BlackJackCard(Card):
     @property
     def value(self):
         return self._values[self.rank]
+
+
+class PlayerStatus(Enum):
+    PLAYING = auto()
 
 
 class Player:
@@ -29,3 +34,7 @@ class Player:
 
     def hit(self, card):
         self._hand.append(card)
+
+    @property
+    def status(self):
+        return PlayerStatus.PLAYING

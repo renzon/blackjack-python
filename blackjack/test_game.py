@@ -1,7 +1,7 @@
 import pytest
 
 from blackjack.base_deck import FrenchDeck
-from blackjack.game import BlackJackCard, Player
+from blackjack.game import BlackJackCard, Player, PlayerStatus
 
 
 @pytest.mark.parametrize('expected,suit', zip(range(2, 10), FrenchDeck.suits))
@@ -63,3 +63,7 @@ def test_player_hit_effect_on_count(count, hand, player: Player):
     for c in hand:
         player.hit(c)
     assert count == player.count()
+
+
+def test_player_initial_status(player: Player):
+    assert PlayerStatus.PLAYING == player.status
