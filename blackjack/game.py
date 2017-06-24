@@ -65,5 +65,8 @@ class BlackJackDeck(FrenchDeck):
 
 
 class Game:
-    def __init__(self, *, n_players):
-        self._players = tuple(Player() for _ in range(n_players))
+    def __init__(self, *, n_players=None, player_names=None):
+        if player_names:
+            self._players = tuple(Player(name) for name in player_names)
+        else:
+            self._players = tuple(Player() for _ in range(n_players))

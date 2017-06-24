@@ -153,3 +153,17 @@ def test_game_init_with_players_count(n_players):
     """Check Game initialization with players count"""
     game = Game(n_players=n_players)
     assert n_players == len(game._players)
+
+
+@pytest.mark.parametrize(
+    'names',
+    [
+        'Jane Mary'.split(),
+        'Jane Mary Susan'.split(),
+        'Jane Mary Susan May'.split(),
+    ]
+)
+def test_game_init_with_player_names(names):
+    """Check Game initialization with players count"""
+    game = Game(player_names=names)
+    assert names == [player.name for player in game._players]
