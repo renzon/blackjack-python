@@ -28,3 +28,7 @@ def test_player_initial_hand():
     player = Player()
     assert tuple() == player.hand
 
+
+def test_player_initial_count():
+    player = Player()
+    assert 0 == player.count()

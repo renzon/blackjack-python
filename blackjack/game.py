@@ -19,3 +19,10 @@ class Player:
     @property
     def hand(self):
         return tuple(self._hand)
+
+    def count(self):
+        """Sum card values on hand
+
+        :return: int
+        """
+        return 0
