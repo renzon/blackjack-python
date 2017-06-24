@@ -19,6 +19,10 @@ class PlayerStatus(Enum):
     STOPPED = auto()
 
 
+class PlayerInvalidOperation(Exception):
+    """Exception to be raised when player try an invalid operation"""
+
+
 class Player:
     def __init__(self):
         self._status = PlayerStatus.PLAYING
@@ -36,6 +40,9 @@ class Player:
         return sum(c.value for c in self._hand)
 
     def hit(self, card):
+        if self.status is PlayerStatus.STOPPED:
+            raise PlayerInvalidOperation(
+                f"{self} can't hit because its status is {self.status}")
         self._hand.append(card)
         if self.count() > 21:
             self._status = PlayerStatus.EXCEEDED

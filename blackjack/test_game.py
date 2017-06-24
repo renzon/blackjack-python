@@ -1,7 +1,8 @@
 import pytest
 
 from blackjack.base_deck import FrenchDeck
-from blackjack.game import BlackJackCard, Player, PlayerStatus
+from blackjack.game import BlackJackCard, Player, PlayerStatus, \
+    PlayerInvalidOperation
 
 
 @pytest.mark.parametrize('expected,suit', zip(range(2, 10), FrenchDeck.suits))
@@ -90,7 +91,7 @@ def exceeded_player(lucky_player):
 
 
 @pytest.fixture
-def stopped_player(lucky_player:Player):
+def stopped_player(lucky_player: Player):
     st_player = lucky_player
     st_player.stop()
     return st_player
@@ -102,3 +103,8 @@ def test_player_exceeding_21(exceeded_player):
 
 def test_player_stopped_status(stopped_player):
     assert PlayerStatus.STOPPED == stopped_player.status
+
+
+def test_player_stopped_cant_hit(stopped_player):
+    with pytest.raises(PlayerInvalidOperation):
+        stopped_player.hit(BlackJackCard('A', '♣'))
