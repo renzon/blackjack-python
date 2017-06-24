@@ -75,6 +75,7 @@ class Game:
             self._players = tuple(Player(name) for name in player_names)
         else:
             self._players = tuple(Player() for _ in range(n_players))
+        self._current_turn_player = self._players[0]
 
     def shuffle_cards(self):
         shuffle(self._deck)
@@ -82,3 +83,7 @@ class Game:
     @property
     def status(self):
         return GameStatus.RUNNING
+
+    @property
+    def current_turn_player(self):
+        return self._current_turn_player

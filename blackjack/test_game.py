@@ -185,5 +185,10 @@ def test_game_shuffle_cards(game: Game):
     assert initial_cards_order != list(game._deck)
 
 
-def test_game_initial_status(game:Game):
+def test_game_initial_status(game: Game):
     assert GameStatus.RUNNING == game.status
+
+
+def test_game_intial_turn_player(game: Game):
+    """Check first player is current turn player"""
+    assert game._players[0] is game.current_turn_player
