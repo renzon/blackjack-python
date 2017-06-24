@@ -113,3 +113,16 @@ def test_player_stopped_cant_hit(stopped_player):
 def test_player_exceeded_cant_hit(exceeded_player):
     with pytest.raises(PlayerInvalidOperation):
         exceeded_player.hit(BlackJackCard('A', '♣'))
+
+
+@pytest.fixture
+def reset_player_count():
+    count = Player._players_count
+    Player._players_count = 0
+    yield
+    Player._players_count = count
+
+
+@pytest.mark.usefixtures('reset_player_count')
+def test_default_player_name():
+    assert 'Player 1' == str(Player())

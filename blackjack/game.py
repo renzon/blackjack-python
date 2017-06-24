@@ -21,7 +21,11 @@ class PlayerInvalidOperation(Exception):
 
 
 class Player:
+    _players_count = 0
+
     def __init__(self):
+        Player._players_count += 1
+        self.name = str(Player._players_count)
         self._status = PlayerStatus.PLAYING
         self._hand = []
 
@@ -50,3 +54,7 @@ class Player:
 
     def stop(self):
         self._status = PlayerStatus.STOPPED
+
+    def __str__(self):
+        cls_name = type(self).__name__
+        return f'{cls_name} {self.name}'
