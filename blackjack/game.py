@@ -16,6 +16,7 @@ class BlackJackCard(Card):
 class PlayerStatus(Enum):
     PLAYING = auto()
     EXCEEDED = auto()
+    STOPPED = auto()
 
 
 class Player:
@@ -42,3 +43,6 @@ class Player:
     @property
     def status(self):
         return self._status
+
+    def stop(self):
+        self._status = PlayerStatus.STOPPED

@@ -82,7 +82,23 @@ def lucky_player(player):
     return player
 
 
-def test_player_exceeding_21(lucky_player):
-    exceeded_player = lucky_player
-    exceeded_player.hit(BlackJackCard('A', '♣'))
+@pytest.fixture
+def exceeded_player(lucky_player):
+    exc_player = lucky_player
+    exc_player.hit(BlackJackCard('A', '♣'))
+    return exc_player
+
+
+@pytest.fixture
+def stopped_player(lucky_player:Player):
+    st_player = lucky_player
+    st_player.stop()
+    return st_player
+
+
+def test_player_exceeding_21(exceeded_player):
     assert PlayerStatus.EXCEEDED == exceeded_player.status
+
+
+def test_player_stopped_status(stopped_player):
+    assert PlayerStatus.STOPPED == stopped_player.status
