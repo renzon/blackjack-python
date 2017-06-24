@@ -200,3 +200,10 @@ def test_game_toss_card_effect_on_player(game: Game):
     previous_hand_len = len(player.hand)
     game.toss_card()
     assert (0, 1) == (previous_hand_len, len(player.hand))
+
+
+def test_game_toss_card_effect_on_deck(game: Game):
+    """Check card is popped from deck"""
+    previous_deck_len = len(game._deck)
+    game.toss_card()
+    assert (52, 51) == (previous_deck_len, len(game._deck))
