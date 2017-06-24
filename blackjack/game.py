@@ -98,8 +98,11 @@ class Game:
         return self._current_turn_player
 
     def toss_card(self):
+        if self.status is not GameStatus.RUNNING:
+            return False
         self.current_turn_player.hit(self._deck.pop())
         self._update_current_player()
+        return True
 
     def deal(self):
         """Proceed initial deal tossing 2 cards for each player"""
