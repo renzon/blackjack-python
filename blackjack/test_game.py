@@ -260,7 +260,15 @@ def test_game_over_when_all_players_stopped(game):
         game.stop()
     assert GameStatus.OVER == game.status
 
-def test_game_over_when_all_players__exceeded(game):
+
+def test_game_over_when_all_players_exceeded(game):
+    while game.toss_card():
+        pass
+    assert GameStatus.OVER == game.status
+
+
+def test_game_over_when_all_players_exceeded_or_stopped(game):
+    game.stop()
     while game.toss_card():
         pass
     assert GameStatus.OVER == game.status
