@@ -1,5 +1,6 @@
 from enum import Enum
 from itertools import cycle
+from random import shuffle
 
 from blackjack.base_deck import Card, FrenchDeck
 
@@ -71,3 +72,6 @@ class Game:
             self._players = tuple(Player(name) for name in player_names)
         else:
             self._players = tuple(Player() for _ in range(n_players))
+
+    def shuffle_cards(self):
+        shuffle(self._deck)

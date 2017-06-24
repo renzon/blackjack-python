@@ -177,3 +177,9 @@ def game():
 
 def test_game_has_black_jack_deck(game):
     assert isinstance(game._deck, BlackJackDeck)
+
+
+def test_game_shuffle_cards(game:Game):
+    initial_cards_order = list(game._deck)
+    game.shuffle_cards()
+    assert initial_cards_order != list(game._deck)
