@@ -189,6 +189,14 @@ def test_game_initial_status(game: Game):
     assert GameStatus.RUNNING == game.status
 
 
-def test_game_intial_turn_player(game: Game):
+def test_game_initial_turn_player(game: Game):
     """Check first player is current turn player"""
     assert game._players[0] is game.current_turn_player
+
+
+def test_game_toss_card_effect_on_player(game: Game):
+    """Check first player is current turn player"""
+    player = game.current_turn_player
+    previous_hand_len = len(player.hand)
+    game.toss_card()
+    assert (0, 1) == (previous_hand_len, len(player.hand))

@@ -87,3 +87,6 @@ class Game:
     @property
     def current_turn_player(self):
         return self._current_turn_player
+
+    def toss_card(self):
+        self.current_turn_player.hit(self._deck.pop())
