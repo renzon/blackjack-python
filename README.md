@@ -2,6 +2,7 @@
 A Simple version of Black Jack game in Python 3.6
 
 [![Build Status](https://travis-ci.org/renzon/blackjack-python.svg?branch=master)](https://travis-ci.org/renzon/blackjack-python)
+[![codecov](https://codecov.io/gh/renzon/blackjack-python/branch/master/graph/badge.svg)](https://codecov.io/gh/renzon/blackjack-python)
 
 Console example:
 
