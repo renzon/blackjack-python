@@ -230,3 +230,13 @@ def test_game_stop_effect_on_current_player(game: Game):
 def test_game_current_player_chaange_after_stop(game: Game):
     game.stop()
     assert game._players[1] is game.current_turn_player
+
+
+def test_stopped_player_never_become_current_player(game):
+    stopped_player = game.current_turn_player
+    game.stop()
+    round_players = []
+    for _ in range(len(game._players)):
+        round_players.append(game.current_turn_player)
+        game.toss_card()
+    assert stopped_player not in round_players

@@ -80,6 +80,8 @@ class Game:
 
     def _update_current_player(self):
         self._current_turn_player = next(self._current_player_cursor)
+        while self.current_turn_player.status is not PlayerStatus.PLAYING:
+            self._current_turn_player = next(self._current_player_cursor)
 
     def shuffle_cards(self):
         shuffle(self._deck)
