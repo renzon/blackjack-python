@@ -1,0 +1,13 @@
+language: python
+python:
+  - 3.6
+# command to install dependencies
+install:
+  - pip install -q -r requirements-test.txt codecov
+# command to run tests
+script:
+  - flake8 blackjack
+  - pytest --cov=blackjack
+
+after_success:
+  - codecov
