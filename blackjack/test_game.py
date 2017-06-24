@@ -1,3 +1,5 @@
+from random import shuffle
+
 import pytest
 
 from blackjack.game import (
@@ -272,3 +274,42 @@ def test_game_over_when_all_players_exceeded_or_stopped(game):
     while game.toss_card():
         pass
     assert GameStatus.OVER == game.status
+
+
+def generate_ordered_stopped_players():
+    """Generating tuples of ordered players by points on hands"""
+
+    players = list(map(Player, range(1, 5)))
+    players[0]._hand = [
+        BlackJackCard('A', '♣'),
+        BlackJackCard('2', '♣'),
+        BlackJackCard('3', '♣'),
+        BlackJackCard('4', '♣'),
+    ]
+    players[1]._hand = [
+        BlackJackCard('A', '♣'),
+        BlackJackCard('2', '♣'),
+        BlackJackCard('3', '♣'),
+    ]
+    players[2]._hand = [BlackJackCard('A', '♣'), BlackJackCard('2', '♣'), ]
+
+    players[3]._hand = [BlackJackCard('A', '♣')]
+
+    yield players
+
+    # Forth player exceed
+    players[3]._hand = [
+        BlackJackCard('J', '♣'),
+        BlackJackCard('Q', '♣'),
+        BlackJackCard('K', '♣'),
+    ]
+    yield players
+
+
+@pytest.mark.parametrize('ordered_players', generate_ordered_stopped_players(),
+                         ids=['No exceeded players', 'One exceeed player'])
+def test_game_rank(game:Game, ordered_players):
+    shuffled_players = list(ordered_players)
+    shuffle(shuffled_players)
+    game._players = shuffled_players
+    assert ordered_players == game.rank()

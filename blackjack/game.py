@@ -112,3 +112,12 @@ class Game:
     def stop(self):
         self.current_turn_player.stop()
         self._update_current_player()
+
+    def rank(self):
+        """Generate game players rank"""
+
+        def to_point(player):
+            points = player.count()
+            return 0 if points > 21 else points
+
+        return sorted(self._players, key=to_point, reverse=True)
