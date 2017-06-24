@@ -1,7 +1,7 @@
 from enum import Enum
 from itertools import cycle
 
-from blackjack.base_deck import Card
+from blackjack.base_deck import Card, FrenchDeck
 
 
 class BlackJackCard(Card):
@@ -58,3 +58,10 @@ class Player:
     def __str__(self):
         cls_name = type(self).__name__
         return f'{cls_name} {self.name}'
+
+
+class BlackJackDeck(FrenchDeck):
+    _card_class = BlackJackCard
+
+
+
