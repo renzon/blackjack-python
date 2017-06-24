@@ -65,7 +65,7 @@ class BlackJackDeck(FrenchDeck):
     _card_class = BlackJackCard
 
 
-GameStatus = Enum('GameStatus', 'RUNNING FINISHED')
+GameStatus = Enum('GameStatus', 'RUNNING OVER')
 
 
 class Game:
@@ -79,16 +79,19 @@ class Game:
         self._update_current_player()
 
     def _update_current_player(self):
-        self._current_turn_player = next(self._current_player_cursor)
-        while self.current_turn_player.status is not PlayerStatus.PLAYING:
+        if self.status is GameStatus.RUNNING:
             self._current_turn_player = next(self._current_player_cursor)
+            while self.current_turn_player.status is not PlayerStatus.PLAYING:
+                self._current_turn_player = next(self._current_player_cursor)
 
     def shuffle_cards(self):
         shuffle(self._deck)
 
     @property
     def status(self):
-        return GameStatus.RUNNING
+        if any(p.status == PlayerStatus.PLAYING for p in self._players):
+            return GameStatus.RUNNING
+        return GameStatus.OVER
 
     @property
     def current_turn_player(self):

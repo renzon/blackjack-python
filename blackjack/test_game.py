@@ -253,3 +253,9 @@ def test_stopped_player_never_become_current_player(game):
         round_players.append(game.current_turn_player)
         game.toss_card()
     assert exceeded_player not in round_players
+
+
+def test_all_players_stopped(game):
+    for _ in game._players:
+        game.stop()
+    assert GameStatus.OVER == game.status
