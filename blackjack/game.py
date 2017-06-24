@@ -100,3 +100,6 @@ class Game:
         """Proceed initial deal tossing 2 cards for each player"""
         for _ in range(2 * len(self._players)):
             self.toss_card()
+
+    def stop(self):
+        self.current_turn_player.stop()
