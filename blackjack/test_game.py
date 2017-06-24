@@ -240,3 +240,16 @@ def test_stopped_player_never_become_current_player(game):
         round_players.append(game.current_turn_player)
         game.toss_card()
     assert stopped_player not in round_players
+
+
+def test_stopped_player_never_become_current_player(game):
+    exceeded_player = game.current_turn_player
+    game.toss_card()  # updating to next player
+    # exceeding player
+    for _ in range(3):
+        exceeded_player.hit(BlackJackCard('10', '♣'))
+    round_players = []
+    for _ in range(len(game._players)):
+        round_players.append(game.current_turn_player)
+        game.toss_card()
+    assert exceeded_player not in round_players
