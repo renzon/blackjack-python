@@ -26,3 +26,6 @@ class Player:
         :return: int
         """
         return 0
+
+    def hit(self, card):
+        self._hand.append(card)

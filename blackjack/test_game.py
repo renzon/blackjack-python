@@ -24,11 +24,35 @@ def test_face_card_value(face, suit):
     assert 10 == BlackJackCard(face, suit).value
 
 
-def test_player_initial_hand():
-    player = Player()
+@pytest.fixture
+def player():
+    return Player()
+
+
+def test_player_initial_hand(player):
     assert tuple() == player.hand
 
 
-def test_player_initial_count():
-    player = Player()
+def test_player_initial_count(player):
     assert 0 == player.count()
+
+
+HAND_COUNT = {
+    1: [BlackJackCard('A', '♣')],
+    3: [
+        BlackJackCard('A', '♣'),
+        BlackJackCard('2', '♣')
+    ],
+    6: [
+        BlackJackCard('A', '♣'),
+        BlackJackCard('2', '♣'),
+        BlackJackCard('3', '♣')
+    ],
+}
+
+
+@pytest.mark.parametrize('hand', HAND_COUNT.values())
+def test_player_hit_effect_on_hand(hand, player: Player):
+    for c in hand:
+        player.hit(c)
+    assert tuple(hand) == player.hand
