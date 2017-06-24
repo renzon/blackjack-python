@@ -77,18 +77,18 @@ Console example:
     ...     print(player.description())
     ... 
     Player Susan
-        hand : 
+        hand :
             A of ♡
             K of ♠
             K of ♣
         count: 21
     Player May
-        hand : 
+        hand :
             A of ♢
             K of ♡
         count: 11
     Player Sara
-        hand : 
+        hand :
             A of ♠
             A of ♣
             K of ♢
