@@ -108,3 +108,8 @@ def test_player_stopped_status(stopped_player):
 def test_player_stopped_cant_hit(stopped_player):
     with pytest.raises(PlayerInvalidOperation):
         stopped_player.hit(BlackJackCard('A', '♣'))
+
+
+def test_player_exceeded_cant_hit(exceeded_player):
+    with pytest.raises(PlayerInvalidOperation):
+        exceeded_player.hit(BlackJackCard('A', '♣'))

@@ -37,7 +37,7 @@ class Player:
         return sum(c.value for c in self._hand)
 
     def hit(self, card):
-        if self.status is PlayerStatus.STOPPED:
+        if self.status in (PlayerStatus.STOPPED, PlayerStatus.EXCEEDED):
             raise PlayerInvalidOperation(
                 f"{self} can't hit because its status is {self.status}")
         self._hand.append(card)
