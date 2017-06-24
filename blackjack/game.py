@@ -1,4 +1,4 @@
-from enum import Enum, auto
+from enum import Enum
 from itertools import cycle
 
 from blackjack.base_deck import Card
@@ -13,10 +13,7 @@ class BlackJackCard(Card):
         return self._values[self.rank]
 
 
-class PlayerStatus(Enum):
-    PLAYING = auto()
-    EXCEEDED = auto()
-    STOPPED = auto()
+PlayerStatus = Enum('PlayerStatus', 'PLAYING EXCEEDED STOPPED')
 
 
 class PlayerInvalidOperation(Exception):
