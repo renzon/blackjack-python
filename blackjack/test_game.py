@@ -167,3 +167,13 @@ def test_game_init_with_player_names(names):
     """Check Game initialization with players count"""
     game = Game(player_names=names)
     assert names == [player.name for player in game._players]
+
+
+@pytest.fixture
+def game():
+    game = Game(n_players=4)
+    return game
+
+
+def test_game_has_black_jack_deck(game):
+    assert isinstance(game._deck, BlackJackDeck)
