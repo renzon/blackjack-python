@@ -25,7 +25,7 @@ class Player:
 
     def __init__(self, name=None):
         Player._players_count += 1
-        self.name = name or str(Player._players_count)
+        self.name = str(Player._players_count) if name is None else str(name)
         self._status = PlayerStatus.PLAYING
         self._hand = []
 
@@ -64,4 +64,6 @@ class BlackJackDeck(FrenchDeck):
     _card_class = BlackJackCard
 
 
-
+class Game:
+    def __init__(self, *, n_players):
+        self._players = tuple(Player() for _ in range(n_players))

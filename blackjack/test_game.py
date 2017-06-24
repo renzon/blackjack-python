@@ -5,7 +5,7 @@ from blackjack.game import (
     BlackJackDeck,
     Player,
     PlayerStatus,
-    PlayerInvalidOperation)
+    PlayerInvalidOperation, Game)
 
 
 @pytest.mark.parametrize('expected,suit',
@@ -145,4 +145,11 @@ def test_custom_player_name():
 
 
 def test_black_jack_deck_card():
-    assert isinstance(BlackJackDeck()[0], BlackJackCard)
+    assert isinstance(BlackJackDeck().pop(), BlackJackCard)
+
+
+@pytest.mark.parametrize('n_players', range(2, 10))
+def test_game_init_with_players_count(n_players):
+    """Check Game initialization with players count"""
+    game = Game(n_players=n_players)
+    assert n_players == len(game._players)
