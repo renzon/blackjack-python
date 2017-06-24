@@ -65,6 +65,9 @@ class BlackJackDeck(FrenchDeck):
     _card_class = BlackJackCard
 
 
+GameStatus = Enum('GameStatus', 'RUNNING FINISHED')
+
+
 class Game:
     def __init__(self, *, n_players=None, player_names=None):
         self._deck = BlackJackDeck()
@@ -75,3 +78,7 @@ class Game:
 
     def shuffle_cards(self):
         shuffle(self._deck)
+
+    @property
+    def status(self):
+        return GameStatus.RUNNING
