@@ -75,7 +75,11 @@ class Game:
             self._players = tuple(Player(name) for name in player_names)
         else:
             self._players = tuple(Player() for _ in range(n_players))
-        self._current_turn_player = self._players[0]
+        self._current_player_cursor = cycle(self._players)
+        self._update_current_player()
+
+    def _update_current_player(self):
+        self._current_turn_player = next(self._current_player_cursor)
 
     def shuffle_cards(self):
         shuffle(self._deck)
@@ -90,3 +94,4 @@ class Game:
 
     def toss_card(self):
         self.current_turn_player.hit(self._deck.pop())
+        self._update_current_player()

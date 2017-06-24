@@ -207,3 +207,9 @@ def test_game_toss_card_effect_on_deck(game: Game):
     previous_deck_len = len(game._deck)
     game.toss_card()
     assert (52, 51) == (previous_deck_len, len(game._deck))
+
+
+def test_game_toss_card_effect_current_turn_player(game: Game):
+    """Check next player become current_turn_palyer"""
+    game.toss_card()
+    assert game._players[1] is game.current_turn_player
