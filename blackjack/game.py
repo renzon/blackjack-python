@@ -77,6 +77,10 @@ class Player:
         return _PLAYER_TEMPLATE.format(
             name=str(self), hand=hand, count=self.count())
 
+    def __repr__(self):
+        cls_name = type(self).__name__
+        return f'{cls_name}({self.name!r}) hand:{self.hand!r}'
+
 
 class BlackJackDeck(FrenchDeck):
     _card_class = BlackJackCard
