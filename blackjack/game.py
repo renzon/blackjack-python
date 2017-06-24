@@ -95,3 +95,8 @@ class Game:
     def toss_card(self):
         self.current_turn_player.hit(self._deck.pop())
         self._update_current_player()
+
+    def deal(self):
+        """Proceed initial deal tossing 2 cards for each player"""
+        for _ in range(2 * len(self._players)):
+            self.toss_card()

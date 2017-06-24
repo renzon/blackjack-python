@@ -210,6 +210,12 @@ def test_game_toss_card_effect_on_deck(game: Game):
 
 
 def test_game_toss_card_effect_current_turn_player(game: Game):
-    """Check next player become current_turn_palyer"""
+    """Check next player become current_turn_player"""
     game.toss_card()
     assert game._players[1] is game.current_turn_player
+
+
+def test_game_initial_deal(game: Game):
+    game.deal()
+    player_hands_lens = [len(p.hand) for p in game._players]
+    assert [2] * len(player_hands_lens) == player_hands_lens
