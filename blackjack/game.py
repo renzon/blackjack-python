@@ -15,10 +15,12 @@ class BlackJackCard(Card):
 
 class PlayerStatus(Enum):
     PLAYING = auto()
+    EXCEEDED = auto()
 
 
 class Player:
     def __init__(self):
+        self._status = PlayerStatus.PLAYING
         self._hand = []
 
     @property
@@ -34,7 +36,9 @@ class Player:
 
     def hit(self, card):
         self._hand.append(card)
+        if self.count() > 21:
+            self._status = PlayerStatus.EXCEEDED
 
     @property
     def status(self):
-        return PlayerStatus.PLAYING
+        return self._status

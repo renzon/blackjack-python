@@ -67,3 +67,22 @@ def test_player_hit_effect_on_count(count, hand, player: Player):
 
 def test_player_initial_status(player: Player):
     assert PlayerStatus.PLAYING == player.status
+
+
+@pytest.fixture
+def lucky_player(player):
+    winning_hand = (
+        BlackJackCard('10', '♣'),
+        BlackJackCard('9', '♣'),
+        BlackJackCard('2', '♣')
+    )
+
+    for card in winning_hand:
+        player.hit(card)
+    return player
+
+
+def test_player_exceeding_21(lucky_player):
+    exceeded_player = lucky_player
+    exceeded_player.hit(BlackJackCard('A', '♣'))
+    assert PlayerStatus.EXCEEDED == exceeded_player.status
