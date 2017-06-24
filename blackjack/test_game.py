@@ -221,7 +221,12 @@ def test_game_initial_deal(game: Game):
     assert [2] * len(player_hands_lens) == player_hands_lens
 
 
-def test_game_stop_effect_current_player(game: Game):
+def test_game_stop_effect_on_current_player(game: Game):
     player = game.current_turn_player
     game.stop()
     assert PlayerStatus.STOPPED == player.status
+
+
+def test_game_current_player_chaange_after_stop(game: Game):
+    game.stop()
+    assert game._players[1] is game.current_turn_player

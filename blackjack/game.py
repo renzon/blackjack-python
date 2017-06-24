@@ -103,3 +103,4 @@ class Game:
 
     def stop(self):
         self.current_turn_player.stop()
+        self._update_current_player()
