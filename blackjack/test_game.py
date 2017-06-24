@@ -126,3 +126,11 @@ def reset_player_count():
 @pytest.mark.usefixtures('reset_player_count')
 def test_default_player_name():
     assert 'Player 1' == str(Player())
+
+
+@pytest.mark.usefixtures('reset_player_count')
+def test_default_player_incrementing_name():
+    """Check defaults name are Player 1, Player 2 and so on"""
+    players_and_names = ((Player(), f'Player {i}') for i in range(1, 10))
+    players, names = zip(*players_and_names)
+    assert list(names) == list(map(str, players))
