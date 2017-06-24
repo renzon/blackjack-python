@@ -134,3 +134,7 @@ def test_default_player_incrementing_name():
     players_and_names = ((Player(), f'Player {i}') for i in range(1, 10))
     players, names = zip(*players_and_names)
     assert list(names) == list(map(str, players))
+
+
+def test_custom_player_name():
+    assert 'Player Jane' == str(Player('Jane'))

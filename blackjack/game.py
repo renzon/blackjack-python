@@ -23,9 +23,9 @@ class PlayerInvalidOperation(Exception):
 class Player:
     _players_count = 0
 
-    def __init__(self):
+    def __init__(self, name=None):
         Player._players_count += 1
-        self.name = str(Player._players_count)
+        self.name = name or str(Player._players_count)
         self._status = PlayerStatus.PLAYING
         self._hand = []
 
